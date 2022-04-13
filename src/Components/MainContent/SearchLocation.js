@@ -6,6 +6,7 @@ export default function SearchLocation() {
   
   const [location, setLocation] = useState ("")
   const [data, setData] = useState({})
+  
 
  
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=2252d055e80dd2d34028214774f8cb5e`
