@@ -8,6 +8,11 @@ export default function SearchLocation() {
   const [data, setData] = useState({})
   
 
+  const unixTime = data.dt && data.dt;
+  const daytime = new Date(unixTime*1000).toLocaleTimeString("en-US");
+
+
+  const weatherimage = `https://openweathermap.org/img/wn/${data.weather && data.weather[0].icon}@2x.png`
  
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=2252d055e80dd2d34028214774f8cb5e`
 
@@ -21,7 +26,10 @@ export default function SearchLocation() {
   }
 }
   
-  return (
+  
+
+
+return (
     <div className="searchlocations-container">
     
     
@@ -32,22 +40,21 @@ export default function SearchLocation() {
       
       </div>
         
-      <div class="widget">
+      <div className="widget">
             <div className="left-panel panel">
                 <div className="date">
-                    Monday, 20 Aug 2018
+                    <p>{daytime}</p>
                 </div>
                 <div className="city">
                     {data.name}
                 </div>
                 <div className="temp">
-                   <img src="https://seeklogo.com/images/S/sunny-weather-symbol-logo-4E2A5E54AA-seeklogo.com.png" alt="" width="60" height="60"/>
-                   27&deg;
+                   <img src={weatherimage} alt="" width="60" height="60"/>
+                   {data.main && data.main.temp}&deg;
                 </div>
             </div>
             <div className="right-panel panel">
-                  <img src="https://picsum.photos/200/300" alt="" width="160" height="80"/>
-                  <a href="/detailedcard">Details</a>
+                  <a href="/detailedcard/" >Details</a>
             </div>
       </div> 
       
