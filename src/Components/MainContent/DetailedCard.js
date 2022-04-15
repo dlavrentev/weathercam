@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios";
 import { FaWind, FaHandHoldingWater, FaTemperatureHigh, FaSun, FaRegHeart, FaMoon } from 'react-icons/fa';
+import { setSelectionRange } from '@testing-library/user-event/dist/utils';
 // import { useParams } from 'react-router';
 
 
@@ -12,8 +13,10 @@ export default function DetailedCard() {
 const [weather, setWeather]  = useState([]);  
 const [forecast, setForecast] = useState([]);
 
-const lat = weather.coord && weather.coord.lat;
-const lon = weather.coord && weather.coord.lon
+const [lat, setLat] = useState('');
+const [lon, setLon] = useState('');
+
+
 const unixSet = weather.sys && weather.sys.sunset;
 const unixRise = weather.sys && weather.sys.sunrise;
 const unixTime = weather.dt && weather.dt;
@@ -39,10 +42,12 @@ const url3 = `https://openweathermap.org/img/wn/${forecast.daily && forecast.dai
 const url4 = `https://openweathermap.org/img/wn/${forecast.daily && forecast.daily[4].weather[0].icon}@2x.png`
 
 useEffect(() => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=kairo&appid=2252d055e80dd2d34028214774f8cb5e&units=metric`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=berlin&appid=2252d055e80dd2d34028214774f8cb5e&units=metric`)
     .then(res => {
        console.log(res.data)
        setWeather(res.data)
+       setLat(res.data.coord.lat)
+       setLon(res.data.coord.lon)
     }).catch(err => {
        console.log(err)
     })
@@ -51,20 +56,19 @@ useEffect(() => {
   
 
  useEffect(() => {
-    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=30.0626&lon=31.2497&exclude=minutely&appid=2252d055e80dd2d34028214774f8cb5e&units=metric`)
+    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=2252d055e80dd2d34028214774f8cb5e&units=metric`)
     .then(res => {
        console.log(res.data)
        setForecast(res.data)
     }).catch(err => {
        console.log(err)
     })
-}, [])
+}, [lat,lon])
 
 
 
 
-console.log(lon);
-console.log(lat);
+
 
 return (
 
