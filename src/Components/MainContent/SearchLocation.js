@@ -6,6 +6,7 @@ export default function SearchLocation() {
   
   const [location, setLocation] = useState ("")
   const [data, setData] = useState({})
+  const [showdiv,setShowdiv] = useState(false);
   
 
   const unixTime = data.dt && data.dt;
@@ -21,6 +22,7 @@ export default function SearchLocation() {
     axios.get(url).then((response) => {
       setData(response.data)
       console.log(response.data)
+      setShowdiv(true);
     })
     setLocation("")
   }
@@ -39,24 +41,26 @@ return (
         <input id="searchlocations" className="searchlocations" type="text" placeholder="Search" aria-label="Search" value={location} onKeyPress={searchLocation} onChange={event => setLocation(event.target.value)}/>
       
       </div>
-        
-      <div className="widget">
-            <div className="left-panel panel">
-                <div className="date">
-                    <p>{daytime}</p>
-                </div>
-                <div className="city">
-                    {data.name}
-                </div>
-                <div className="temp">
-                   <img src={weatherimage} alt="" width="60" height="60"/>
-                   {data.main && data.main.temp}&deg;
-                </div>
-            </div>
-            <div className="right-panel panel">
-                  <a href="/detailedcard/" >Details</a>
-            </div>
-      </div> 
+        {
+          showdiv ? <div className="widget">
+          <div className="left-panel panel">
+              <div className="date">
+                  <p>{daytime}</p>
+              </div>
+              <div className="city">
+                  {data.name}
+              </div>
+              <div className="temp">
+                 <img src={weatherimage} alt="" width="60" height="60"/>
+                 {data.main && data.main.temp}&deg;
+              </div>
+          </div>
+          <div className="right-panel panel">
+                <a href={`/detailedcard/${data.name}`} >Details</a>
+          </div>
+    </div> : null
+        }
+      
       
       
     </div>    

@@ -44,7 +44,7 @@ const user = {
       <Route path="/"   element={<SearchLocation />}/>
       <Route path="/random" element={<RandomDetail />}/>
       <Route path="/yourweather" element={<YourWeather />}/>
-      <Route path="/detailedcard/" element={<DetailedCard />}/>
+      <Route path="/detailedcard/:cityname" element={<DetailedCard />}/>
       <Route path="/login" element={<LoginForm />}/>
       <Route path="/register" element={<RegisterForm />}/>
       

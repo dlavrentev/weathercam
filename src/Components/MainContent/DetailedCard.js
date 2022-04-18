@@ -1,17 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios";
 import { FaWind, FaHandHoldingWater, FaTemperatureHigh, FaSun, FaRegHeart, FaMoon } from 'react-icons/fa';
-import { setSelectionRange } from '@testing-library/user-event/dist/utils';
-// import { useParams } from 'react-router';
+import { useParams } from 'react-router';
 
 
 export default function DetailedCard() {
 
 
-// const {locationcity} = useParams()
+const {cityname} = useParams()
 
 const [weather, setWeather]  = useState([]);  
 const [forecast, setForecast] = useState([]);
+const [webcamid, setWebcamid] = useState([]);
 
 const [lat, setLat] = useState('');
 const [lon, setLon] = useState('');
@@ -33,16 +33,17 @@ const threeday = new Date(unixDayThree*1000).toLocaleDateString("en-US");
 const fourday = new Date(unixDayFour*1000).toLocaleDateString("en-US");
 
 
-const urllatlon = `https://api.openweathermap.org/data/2.5/onecall?lat=${weather.coord && weather.coord.lat}&lon=${weather.coord && weather.coord.lon}&exclude=minutely&appid=2252d055e80dd2d34028214774f8cb5e&units=metric`
+
 
 const url = `https://openweathermap.org/img/wn/${weather.weather && weather.weather[0].icon}@2x.png`
 const url1 = `https://openweathermap.org/img/wn/${forecast.daily && forecast.daily[1].weather[0].icon}@2x.png`
 const url2 = `https://openweathermap.org/img/wn/${forecast.daily && forecast.daily[2].weather[0].icon}@2x.png`
 const url3 = `https://openweathermap.org/img/wn/${forecast.daily && forecast.daily[3].weather[0].icon}@2x.png`
 const url4 = `https://openweathermap.org/img/wn/${forecast.daily && forecast.daily[4].weather[0].icon}@2x.png`
+const urlwebcam = `https://api.lookr.com/embed/player/${webcamid.result && webcamid.result.webcams[0].id}/live`
 
 useEffect(() => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=berlin&appid=2252d055e80dd2d34028214774f8cb5e&units=metric`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=2252d055e80dd2d34028214774f8cb5e&units=metric`)
     .then(res => {
        console.log(res.data)
        setWeather(res.data)
@@ -53,9 +54,18 @@ useEffect(() => {
     })
 }, [])
 
-  
+useEffect(() => {
+    axios.get(`https://api.windy.com/api/webcams/v2/list/nearby=${lat},${lon},50?key=cAV1Y3851XcsjVFz0DTR3obaM7qkPDnb`)
+    .then(res => {
+       console.log(res.data)
+       setWebcamid(res.data)
+    }).catch(err => {
+       console.log(err)
+    })
+}, [])
 
- useEffect(() => {
+ 
+useEffect(() => {
     axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=2252d055e80dd2d34028214774f8cb5e&units=metric`)
     .then(res => {
        console.log(res.data)
@@ -64,6 +74,9 @@ useEffect(() => {
        console.log(err)
     })
 }, [lat,lon])
+
+
+
 
 
 
@@ -122,7 +135,7 @@ return (
                 </div>
         
             </div>
-            <div className="div7"> <iframe title="title" width="600px" height="400px"src="https://api.lookr.com/embed/player/1000550952/day?autoplay=1"></iframe> </div>
+            <div className="div7"> <iframe title="title" width="600px" height="400px"src={urlwebcam}></iframe> </div>
             </div>
     </div>
   )
