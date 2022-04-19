@@ -12,6 +12,7 @@ const {cityname} = useParams()
 const [weather, setWeather]  = useState([]);  
 const [forecast, setForecast] = useState([]);
 const [webcamid, setWebcamid] = useState([]);
+const [webcamurl, setWebcamurl] = useState("");
 
 const [lat, setLat] = useState('');
 const [lon, setLon] = useState('');
@@ -40,7 +41,7 @@ const url1 = `https://openweathermap.org/img/wn/${forecast.daily && forecast.dai
 const url2 = `https://openweathermap.org/img/wn/${forecast.daily && forecast.daily[2].weather[0].icon}@2x.png`
 const url3 = `https://openweathermap.org/img/wn/${forecast.daily && forecast.daily[3].weather[0].icon}@2x.png`
 const url4 = `https://openweathermap.org/img/wn/${forecast.daily && forecast.daily[4].weather[0].icon}@2x.png`
-const urlwebcam = `https://api.lookr.com/embed/player/${webcamid.result && webcamid.result.webcams[0].id}/live`
+// const urlwebcam = `https://api.lookr.com/embed/player/${webcamid.result && webcamid.result.webcams[0].id}/live`
 
 useEffect(() => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=2252d055e80dd2d34028214774f8cb5e&units=metric`)
@@ -59,9 +60,11 @@ useEffect(() => {
     .then(res => {
        console.log(res.data)
        setWebcamid(res.data)
+       setWebcamurl(res.data.result.webcams[0].id)
     }).catch(err => {
        console.log(err)
     })
+    
 }, [lat,lon])
 
  
@@ -133,7 +136,7 @@ return (
         
             </div>
               <div className="div7"> 
-                <iframe title="title" width="400px" height="400px"src={urlwebcam}></iframe> 
+                <iframe title="title" width="400px" height="400px"src={`https://api.lookr.com/embed/player/${webcamurl}/live`}></iframe> 
                 <h2>Location</h2>
                 <div><FaRegHeart size={35}/><FaRandom size={35} className='reload-heart-btn' /></div>
               </div>
