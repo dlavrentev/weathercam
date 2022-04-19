@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios";
-import { FaWind, FaHandHoldingWater, FaTemperatureHigh, FaSun, FaRegHeart, FaMoon } from 'react-icons/fa';
+import { FaWind, FaHandHoldingWater, FaTemperatureHigh, FaSun, FaRegHeart, FaMoon, FaRandom } from 'react-icons/fa';
 import { useParams } from 'react-router';
 
 
@@ -62,7 +62,7 @@ useEffect(() => {
     }).catch(err => {
        console.log(err)
     })
-}, [])
+}, [lat,lon])
 
  
 useEffect(() => {
@@ -90,52 +90,53 @@ return (
             <div className="weather-card">
             
             <div className="div1">
-                <p>{weather.name && weather.name}</p>
+                <h2>{weather.name && weather.name}</h2>
                 <p>{weather.sys && weather.sys.country}</p>
             </div>
             
             <div className="div2">
                 <p>{daytime}</p>
-                <p>{weather.main && weather.main.temp}&deg;C</p>
+                <h3>{weather.main && weather.main.temp}&deg;C</h3>
             </div>
             
             <div className="div3">
-                <img src={url} alt="" />
-                <p>{weather.weather && weather.weather[0].main}</p></div>
-            <div className="div4">
-                <h1><FaRegHeart /></h1>
-                </div>
+                <img src={url} height="150px" alt="" />
+                <h2>{weather.weather && weather.weather[0].main}</h2></div>
             <div className="div5">
-                <p><FaHandHoldingWater />{weather.main && weather.main.humidity}%</p>
-                <p><FaWind />{weather.wind && weather.wind.speed} km/h</p>
-                <p><FaMoon  />{datesunset}</p>
-                <p><FaSun />{datesunrise}</p>
-                <p><FaTemperatureHigh /> Feels like: {weather.main && weather.main.feels_like}&deg;C</p>
+                <p className='weather-icons'><FaHandHoldingWater />{weather.main && weather.main.humidity}%</p>
+                <p className='weather-icons'><FaWind />{weather.wind && weather.wind.speed} km/h</p>
+                <p className='weather-icons'><FaMoon  />{datesunset}</p>
+                <p className='weather-icons'><FaSun  />{datesunrise}</p>
+                <p className='weather-icons'><FaTemperatureHigh  /> Feels like: {weather.main && weather.main.feels_like}&deg;C</p>
             </div>
             <div className="div6">
-                <div>
+                <div className='forecast-day'>
                     <p>{oneday}</p>
                     <img src={url1} alt=""/>
-                    <p>{forecast.daily && forecast.daily[1].temp.min} / {forecast.daily && forecast.daily[1].temp.max}</p>
+                    <p>{forecast.daily && forecast.daily[1].temp.min}&deg;C / {forecast.daily && forecast.daily[1].temp.max}&deg;C</p>
                 </div>
-                <div>
+                <div className='forecast-day'>
                     <p>{twoday}</p>
                     <img src={url2} alt=""/>
-                    <p>{forecast.daily && forecast.daily[2].temp.min} / {forecast.daily && forecast.daily[2].temp.max}</p>
+                    <p>{forecast.daily && forecast.daily[2].temp.min}&deg;C / {forecast.daily && forecast.daily[2].temp.max}&deg;C</p>
                 </div>
-                <div>
+                <div className='forecast-day'>
                     <p>{threeday}</p>
                     <img src={url3} alt=""/>
-                    <p>{forecast.daily && forecast.daily[3].temp.min} / {forecast.daily && forecast.daily[3].temp.max}</p>
+                    <p>{forecast.daily && forecast.daily[3].temp.min}&deg;C / {forecast.daily && forecast.daily[3].temp.max}&deg;C</p>
                 </div>
-                <div>
+                <div className='forecast-day'>
                     <p>{fourday}</p>
                     <img src={url4} alt=""/>
-                    <p>{forecast.daily && forecast.daily[4].temp.min} / {forecast.daily && forecast.daily[4].temp.max}</p>
+                    <p>{forecast.daily && forecast.daily[4].temp.min}&deg;C / {forecast.daily && forecast.daily[4].temp.max}&deg;C</p>
                 </div>
         
             </div>
-            <div className="div7"> <iframe title="title" width="600px" height="400px"src={urlwebcam}></iframe> </div>
+              <div className="div7"> 
+                <iframe title="title" width="400px" height="400px"src={urlwebcam}></iframe> 
+                <h2>Location</h2>
+                <div><FaRegHeart size={35}/><FaRandom size={35} className='reload-heart-btn' /></div>
+              </div>
             </div>
     </div>
   )

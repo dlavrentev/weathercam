@@ -51,12 +51,12 @@ return (
                   {data.name}
               </div>
               <div className="temp">
-                 <img src={weatherimage} alt="" width="60" height="60"/>
+                 <img src={weatherimage} alt="" width="100" height="100"/>
                  {data.main && data.main.temp}&deg;
               </div>
           </div>
-          <div className="right-panel panel">
-                <a href={`/detailedcard/${data.name}`} >Details</a>
+          <div className="adetails">
+                <a className="adetailstext" href={`/detailedcard/${data.name}`}>Details</a>
           </div>
     </div> : null
         }
