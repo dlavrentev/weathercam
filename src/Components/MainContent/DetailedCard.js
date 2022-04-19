@@ -53,7 +53,7 @@ useEffect(() => {
     }).catch(err => {
        console.log(err)
     })
-}, [])
+}, [cityname])
 
 useEffect(() => {
     axios.get(`https://api.windy.com/api/webcams/v2/list/nearby=${lat},${lon},50?key=cAV1Y3851XcsjVFz0DTR3obaM7qkPDnb`)
@@ -80,7 +80,17 @@ useEffect(() => {
 
 
 
-
+const randomCity = (id) => {
+   axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${id}&appid=2252d055e80dd2d34028214774f8cb5e&units=metric`)
+    .then(res => {
+       console.log(res.data)
+       setWeather(res.data)
+       setLat(res.data.coord.lat)
+       setLon(res.data.coord.lon)
+    }).catch(err => {
+       console.log(err)
+    })
+}
 
 
 
@@ -138,7 +148,7 @@ return (
               <div className="div7"> 
                 <iframe title="title" width="400px" height="400px"src={`https://api.lookr.com/embed/player/${webcamurl}/live`}></iframe> 
                 <h2>Location</h2>
-                <div><FaRegHeart size={35}/><FaRandom size={35} className='reload-heart-btn' /></div>
+                <div><FaRegHeart size={35}/><FaRandom size={35} className='reload-heart-btn' onClick={()=>randomCity(weather.id)}/></div>
               </div>
             </div>
     </div>
