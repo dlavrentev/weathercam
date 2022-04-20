@@ -41,26 +41,26 @@ return (
     
       <div className="search-container">
         
-        <h1 className={darkMode ? "weahtercam-h weathercam-h-dark" : "weathercam-h"}>WEATHERCAM</h1>
+        <h1 className={darkMode ? "weathercam-h weathercam-h-dark" : "weathercam-h"}>WEATHERCAM</h1>
         <input id="searchlocations" className="searchlocations" type="text" placeholder="Search" aria-label="Search" value={location} onKeyPress={searchLocation} onChange={event => setLocation(event.target.value)}/>
       
       </div>
         {
-          showdiv ? <div className="widget">
+          showdiv ? <div className={darkMode ? "widget  widget-dark" : "widget"}>
           <div className="left-panel panel">
-              <div className="date">
+              <div className={darkMode ? "date  date-dark" : "date"}>
                   <p>{daytime}</p>
               </div>
-              <div className="city">
+              <div className={darkMode ? "city  city-dark" : "city"}>
                   {data.name}
               </div>
-              <div className="temp">
+              <div className={darkMode ? "temp  temp-dark" : "temp"}>
                  <img src={weatherimage} alt="" width="100" height="100"/>
                  {data.main && data.main.temp}&deg;
               </div>
           </div>
           <div className="adetails">
-                <a className="adetailstext" href={`/detailedcard/${data.name}`}>Details</a>
+                <a className={darkMode ? "adetailstext  adetailstext-dark" : "adetailstext"} href={`/detailedcard/${data.name}`}>Details</a>
           </div>
     </div> : null
         }

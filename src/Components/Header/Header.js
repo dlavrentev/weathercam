@@ -1,5 +1,6 @@
 import React,{useContext} from 'react'
 import { ModeContext } from '../../Context/ModeContext'
+import profilepicture from '../../assets/profile.jpg'
 
 export default function Header({user, toggleMode}) {
   
@@ -17,7 +18,7 @@ export default function Header({user, toggleMode}) {
           <a className={darkMode ? "a-links a-links-dark" : "a-links"} href="/login">Login/Sign up</a>
         </div>
         <div>
-            <img className="profile-image" src={user.avatarUrl} alt="" />
+            <img className="profile-image" src={profilepicture} alt="" />
         </div>
         
     </div>

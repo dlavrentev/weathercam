@@ -26,7 +26,9 @@ body {
   height: 70px;
   width: 80px;
   background-color: #212121;
-  color: white;
+  color: whitesmoke;
+  border: 4px solid #93FF90;
+  border-radius: 8px;
 }
 
 .switch-btn-dark {
@@ -39,10 +41,9 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: whitesmoke;
   width: 80%;
   margin: auto;
-  background-color: whitesmoke;
 }
 
 .header-container-dark {
@@ -60,16 +61,17 @@ body {
 }
 .a-links:hover {
   background-color: #93FF90;
-  color: white;
+  color: whitesmoke;
 }
 
 .a-links-dark {
-  color: white;
+  color: whitesmoke;
 }
 
 .profile-image {
    width: 80px;
    height: 80px;
+   margin: 6px;
 }
 
 a {
@@ -78,6 +80,10 @@ a {
   text-decoration: none;
 }
 
+.profile-image {
+  border-radius: 50%;
+  border: 3px solid black;
+}
 
 
 /* Footer Component styling  */
@@ -95,7 +101,7 @@ a {
 
 .footer-container-dark {
   background-color: #212121;
-  color: white;
+  color: whitesmoke;
 }
 
 /* SearchLocation Component styling */
@@ -134,7 +140,7 @@ a {
 }
 
 .weathercam-h-dark {
-  color: white;
+  color: whitesmoke;
 }
 
 
@@ -195,11 +201,20 @@ a {
   transform: translate(0rem, -1rem);
 }
 
+.widget-dark {
+  background: linear-gradient(to right, #141e30, #243b55);
+  color: whitesmoke;
+}
+
 .date
 {
   font-size: 14px;
   font-weight: bold;
   color: rgba(0,0,0,0.5);
+}
+
+.date-dark {
+  color: whitesmoke;
 }
 
 .city
@@ -209,6 +224,10 @@ a {
   text-transform: uppercase;
   padding-top: 5px;
   color: rgba(0,0,0,0.7);
+}
+
+.city-dark {
+  color: whitesmoke;
 }
 
 .temp
@@ -222,6 +241,9 @@ a {
   align-items: center;
 }
 
+.temp-dark {
+  color: whitesmoke;
+}
 
 
 
@@ -233,8 +255,12 @@ a {
 }
 
 .adetailstext:hover {
-  color: white;
+  color: whitesmoke;
   background-color: #93FF90;
+}
+
+.adetailstext-dark {
+  color: whitesmoke;
 }
 
 /* ------------- */
@@ -246,7 +272,7 @@ a {
   align-items: center;
   width: 80%;
   margin: auto;
-  background-color: white;
+  background-color: whitesmoke;
   min-height: 80vh;
   background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
 }
@@ -267,6 +293,11 @@ a {
     box-shadow: 0px 25px 20px -26px #080c21;
     padding-left: 16px;
     }
+
+  .weather-card-dark {
+    background: linear-gradient(to right, #141e30, #243b55);
+    color: whitesmoke;
+  }
   
   
   .div1 { 
@@ -340,6 +371,11 @@ a {
 
   .reload-heart-btn {
     padding-left: 16px;
+    cursor: pointer;
+  }
+
+  .like-btn {
+    cursor: pointer;
   }
   
 

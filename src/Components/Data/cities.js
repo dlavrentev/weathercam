@@ -2,7 +2,13 @@ const cities = [
     "berlin",
     "london",
     "vienna",
-    "new york"
+    "new york",
+    "porto",
+    "kassel",
+    "san francisco",
+    "wabern",
+    "copenhagen",
+    "tokyo"
 ]
 
 export default cities;
