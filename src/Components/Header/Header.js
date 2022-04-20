@@ -7,14 +7,14 @@ export default function Header({user, toggleMode}) {
   
   return (
     <div className={darkMode ? "header-container header-container-dark" : "header-container"}>
-        <button className="switch-btn" onClick={toggleMode}>{darkMode ? "LIGHT" : "DARK"}</button>
+        <button className={darkMode ? "switch-btn switch-btn-dark" : "switch-btn"} onClick={toggleMode}>{darkMode ? "LIGHT" : "DARK"}</button>
         <div className="nav-container">
             
-            <a className="a-links" href="/">Find</a>
-            <a className="a-links" href="/yourweather">Your weather</a>
+            <a className={darkMode ? "a-links a-links-dark" : "a-links"} href="/">Find</a>
+            <a className={darkMode ? "a-links a-links-dark" : "a-links"} href="/yourweather">Your weather</a>
         </div>
         <div>
-          <a className="a-links" href="/login">Login/Sign up</a>
+          <a className={darkMode ? "a-links a-links-dark" : "a-links"} href="/login">Login/Sign up</a>
         </div>
         <div>
             <img className="profile-image" src={user.avatarUrl} alt="" />

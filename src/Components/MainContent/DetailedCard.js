@@ -1,21 +1,23 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import axios from "axios";
 import { FaWind, FaHandHoldingWater, FaTemperatureHigh, FaSun, FaRegHeart, FaMoon, FaRandom } from 'react-icons/fa';
 import { useParams } from 'react-router';
-
+import cities from '../Data/cities'
+import { ModeContext } from '../../Context/ModeContext';
 
 export default function DetailedCard() {
 
+const {darkMode, setDarkMode} = useContext(ModeContext);
 
 const {cityname} = useParams()
 
 const [weather, setWeather]  = useState([]);  
 const [forecast, setForecast] = useState([]);
-const [webcamid, setWebcamid] = useState([]);
 const [webcamurl, setWebcamurl] = useState("");
 
 const [lat, setLat] = useState('');
 const [lon, setLon] = useState('');
+const [loading,setLoading]=useState(false)
 
 
 const unixSet = weather.sys && weather.sys.sunset;
@@ -44,28 +46,26 @@ const url4 = `https://openweathermap.org/img/wn/${forecast.daily && forecast.dai
 // const urlwebcam = `https://api.lookr.com/embed/player/${webcamid.result && webcamid.result.webcams[0].id}/live`
 
 useEffect(() => {
+    setLoading(true)
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=2252d055e80dd2d34028214774f8cb5e&units=metric`)
     .then(res => {
        console.log(res.data)
        setWeather(res.data)
        setLat(res.data.coord.lat)
        setLon(res.data.coord.lon)
+       axios.get(`https://api.windy.com/api/webcams/v2/list/nearby=${res.data.coord.lat},${res.data.coord.lon},50?key=cAV1Y3851XcsjVFz0DTR3obaM7qkPDnb`)
+       .then(res => {
+            console.log(res.data)
+            setWebcamurl(res.data.result.webcams[0].id)
+            setLoading(false)
+       }).catch(err => {
+       console.log(err)
+        })
     }).catch(err => {
        console.log(err)
     })
 }, [cityname])
 
-useEffect(() => {
-    axios.get(`https://api.windy.com/api/webcams/v2/list/nearby=${lat},${lon},50?key=cAV1Y3851XcsjVFz0DTR3obaM7qkPDnb`)
-    .then(res => {
-       console.log(res.data)
-       setWebcamid(res.data)
-       setWebcamurl(res.data.result.webcams[0].id)
-    }).catch(err => {
-       console.log(err)
-    })
-    
-}, [lat,lon])
 
  
 useEffect(() => {
@@ -80,17 +80,41 @@ useEffect(() => {
 
 
 
-const randomCity = (id) => {
-   axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${id}&appid=2252d055e80dd2d34028214774f8cb5e&units=metric`)
-    .then(res => {
-       console.log(res.data)
-       setWeather(res.data)
-       setLat(res.data.coord.lat)
-       setLon(res.data.coord.lon)
-    }).catch(err => {
+// const randomCity = () => {
+//   const id = Math.floor(Math.random()*2900000)
+//    axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${id}&appid=2252d055e80dd2d34028214774f8cb5e&units=metric`)
+//     .then(res => {
+//        console.log(res.data)
+//        setWeather(res.data)
+//        setLat(res.data.coord.lat)
+//        setLon(res.data.coord.lon)
+//     }).catch(err => {
+//        console.log(err)
+//     })
+// }
+
+const findRandomCity = () => {
+    setLoading(true)
+    const cityIndex = Math.floor(Math.random()*4)
+     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cities[cityIndex]}&appid=2252d055e80dd2d34028214774f8cb5e&units=metric`)
+      .then(res => {
+         console.log(res.data)
+         setWeather(res.data)
+         setLat(res.data.coord.lat)
+         setLon(res.data.coord.lon)
+         axios.get(`https://api.windy.com/api/webcams/v2/list/nearby=${res.data.coord.lat},${res.data.coord.lon},50?key=cAV1Y3851XcsjVFz0DTR3obaM7qkPDnb`)
+       .then(res => {
+            console.log(res.data)
+            setWebcamurl(res.data.result.webcams[0].id)
+            setLoading(false)
+       }).catch(err => {
        console.log(err)
-    })
-}
+        })
+      }).catch(err => {
+         console.log(err)
+      })
+
+  }
 
 
 
@@ -98,7 +122,7 @@ const randomCity = (id) => {
 
 return (
 
-    <div className='random-detail-container'>
+    <div className={darkMode ? "detail-container detail-container-dark" : "detail-container"}>
 
             <div className="weather-card">
             
@@ -146,12 +170,15 @@ return (
         
             </div>
               <div className="div7"> 
-                <iframe title="title" width="400px" height="400px"src={`https://api.lookr.com/embed/player/${webcamurl}/live`}></iframe> 
+              {
+                  loading ? <img width="400px" height="400px" src="https://miro.medium.com/freeze/max/540/0*DqHGYPBA-ANwsma2.gif" alt=""/>
+                  : <iframe title="title" width="400px" height="400px"src={`https://api.lookr.com/embed/player/${webcamurl}/live`}></iframe>
+              }
+                 
                 <h2>Location</h2>
-                <div><FaRegHeart size={35}/><FaRandom size={35} className='reload-heart-btn' onClick={()=>randomCity(weather.id)}/></div>
+                <div><FaRegHeart size={35}/><FaRandom size={35} className='reload-heart-btn' onClick={findRandomCity}/></div>
               </div>
             </div>
     </div>
   )
 }
-

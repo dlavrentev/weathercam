@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+
+import { ModeContext } from '../../Context/ModeContext'
 
 
 export default function SearchLocation() {
+
+  const {darkMode, setDarkMode} = useContext(ModeContext)
   
   const [location, setLocation] = useState ("")
   const [data, setData] = useState({})
@@ -32,12 +36,12 @@ export default function SearchLocation() {
 
 
 return (
-    <div className="searchlocations-container">
+    <div className={darkMode ? "searchlocations-container searchlocations-container-dark" : "searchlocations-container"}>
     
     
       <div className="search-container">
         
-        <h1>WEATHERCAM</h1>
+        <h1 className={darkMode ? "weahtercam-h weathercam-h-dark" : "weathercam-h"}>WEATHERCAM</h1>
         <input id="searchlocations" className="searchlocations" type="text" placeholder="Search" aria-label="Search" value={location} onKeyPress={searchLocation} onChange={event => setLocation(event.target.value)}/>
       
       </div>

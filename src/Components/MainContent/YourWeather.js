@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useContext} from 'react'
+import { ModeContext } from '../../Context/ModeContext'
 
 export default function YourWeather() {
+
+const {darkMode, setDarkMode} = useContext(ModeContext)
+
+    
   return (
-    <div className="yourweather-container">
+    <div className={darkMode ? "yourweather-container yourweather-container-dark" : "yourweather-container"}>
     <div class="widget">
           
           <div className="left-panel panel">
