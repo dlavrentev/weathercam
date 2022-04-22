@@ -156,7 +156,7 @@ return (
                 <p className='weather-icons'><FaWind />{weather.wind && weather.wind.speed} km/h</p>
                 <p className='weather-icons'><FaMoon  />{datesunset}</p>
                 <p className='weather-icons'><FaSun  />{datesunrise}</p>
-                <p className='weather-icons'><FaTemperatureHigh  /></p> <p>Feels like: {weather.main && weather.main.feels_like}&deg;C</p>
+                <p className='weather-icons'><FaTemperatureHigh  /> Feels like: {weather.main && weather.main.feels_like}&deg;C</p>
             </div>
             <div className="div6">
                 <div className='forecast-day'>
