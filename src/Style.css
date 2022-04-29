@@ -19,24 +19,9 @@ body {
 
 
 /* Header Component Styling  */
+@media all and (min-width: 1024px) { 
 
-/* switch button styling */
-
-.switch-btn {
-  height: 70px;
-  width: 80px;
-  background-color: #212121;
-  color: whitesmoke;
-  border: 4px solid #93FF90;
-  border-radius: 8px;
-}
-
-.switch-btn-dark {
-  background-color: whitesmoke;
-  color: #000000;
-}
-
-.header-container {
+  .header-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -85,6 +70,87 @@ a {
   border: 3px solid black;
 }
 
+
+.switch-btn {
+  height: 70px;
+  width: 80px;
+  background-color: #212121;
+  color: whitesmoke;
+  border: 4px solid #93FF90;
+  border-radius: 8px;
+}
+.switch-btn-dark {
+  background-color: whitesmoke;
+  color: #000000;
+}
+
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) { 
+
+  .header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: whitesmoke;
+    width: 80%;
+    margin: auto;
+  }
+  
+  .header-container-dark {
+    background-color: #212121;
+  }
+  
+  .nav-container {
+    margin-left: 40px;
+  }
+  
+  .a-links {
+    padding:  20px;
+    transition: all 0.3s ease-in;
+    border-radius: 8px;
+  }
+  .a-links:hover {
+    background-color: #93FF90;
+    color: whitesmoke;
+  }
+  
+  .a-links-dark {
+    color: whitesmoke;
+  }
+  
+  .profile-image {
+     width: 80px;
+     height: 80px;
+     margin: 6px;
+  }
+  
+  a {
+    color: #0f0f0f;
+    font-size: xx-large;
+    text-decoration: none;
+  }
+  
+  .profile-image {
+    border-radius: 50%;
+    border: 3px solid black;
+  }
+  
+  
+  .switch-btn {
+    height: 70px;
+    width: 80px;
+    background-color: #212121;
+    color: whitesmoke;
+    border: 4px solid #93FF90;
+    border-radius: 8px;
+  }
+  .switch-btn-dark {
+    background-color: whitesmoke;
+    color: #000000;
+  }
+}
 
 /* Footer Component styling  */
 
