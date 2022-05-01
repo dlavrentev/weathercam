@@ -411,6 +411,61 @@ a {
   }
   
 
+
+
+  /* detail container small  */
+
+
+  .weather-card-small {
+    display: grid;
+    margin: 30px auto;
+    width: 70%;
+    grid-template-columns: repeat(2, 60%);
+    grid-template-rows: repeat(2, 250px) repeat(8, 100px);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    justify-content: center;
+    
+    }
+
+    .weather-card-small-dark {
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: whitesmoke;
+    }
+    
+    
+    .div1-small { 
+      grid-area: 1 / 1 / 3 / 3;
+      border: solid brown 3px;
+    
+    }
+    .div2-small { grid-area: 3 / 1 / 4 / 2;
+      border: solid brown 3px; }
+    .div3-small { grid-area: 3 / 2 / 4 / 3; 
+      border: solid brown 3px;}
+    .div4-small { grid-area: 4 / 1 / 6 / 3; 
+      border: solid brown 3px;}
+    .div5-small { grid-area: 6 / 1 / 7 / 2; 
+      border: solid brown 3px;}
+    .div6-small { grid-area: 6 / 2 / 7 / 3; 
+      border: solid brown 3px;}
+    .div7-small { grid-area: 7 / 1 / 8 / 2; 
+      border: solid brown 3px;}
+    .div8-small { grid-area: 7 / 2 / 8 / 3; 
+      border: solid brown 3px;}
+    .div9-small { grid-area: 8 / 1 / 9 / 2; 
+      border: solid brown 3px;}
+    .div10-small { grid-area: 8 / 2 / 9 / 3; 
+      border: solid brown 3px;}
+    .div11-small { grid-area: 9 / 1 / 10 / 2; 
+      border: solid brown 3px;}
+    .div12-small { grid-area: 9 / 2 / 10 / 3; 
+      border: solid brown 3px;}
+    .div13-small { grid-area: 10 / 1 / 11 / 2; 
+      border: solid brown 3px;}
+    .div14-small { grid-area: 10 / 2 / 11 / 3; 
+      border: solid brown 3px;}
+
   /* Login and Register Styling  */
 
   .login-container {

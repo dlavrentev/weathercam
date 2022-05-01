@@ -1,10 +1,11 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useContext, Fragment} from 'react'
 import axios from "axios";
 import { FaWind, FaHandHoldingWater, FaTemperatureHigh, FaSun, FaRegHeart, FaMoon, FaRandom, FaHeart } from 'react-icons/fa';
 import { useParams } from 'react-router';
 import cities from '../Data/cities'
 import { ModeContext } from '../../Context/ModeContext';
 import spinner from '../../assets/spinner.gif';
+import Media from 'react-media';
 
 export default function DetailedCard() {
 
@@ -133,69 +134,129 @@ const findRandomCity = () => {
 
 
 return (
+    
+    <Media queries={{
+        small: "(max-width: 1200px)",
+        medium: "(min-width: 1201px)"
+      }}>
+        {matches => (
+          <Fragment>
+            
+            
+{matches.small && 
+            <div className={darkMode ? "detail-container detail-container-dark" : "detail-container"}>
+          
+            <div className={darkMode ? "weather-card-small weather-card-small-dark" : "weather-card-small"}>
+                  <div className="div1-small">{
+      loading ? <img alt="wait until the page loads" src={spinner} width="50px" height="50px" /> 
+      : <iframe title="title" width="400px" height="400px"src={`https://api.lookr.com/embed/player/${webcamurl}/live`}></iframe>
+  }
+     
+    <h2>{webcamname}</h2> </div>
+                  
+                  <div className="div2-small"><h2>{weather.name && weather.name}</h2>
+                                              <p>{weather.sys && weather.sys.country}</p>
+                  </div>
+                  <div className="div3-small"><p>{daytime}</p>
+                                             <h3>{weather.main && weather.main.temp}&deg;C</h3>
+                  </div>
+                  
+                  <div className="div4-small"><img src={url} height="150px" alt=""/>
+                                      <h2>{weather.weather && weather.weather[0].main}</h2> 
+                  </div>
+                  
+                  <div className="div5-small"><p className='weather-icons'><FaHandHoldingWater />{weather.main && weather.main.humidity}%</p> </div>
+                  <div className="div6-small"><p className='weather-icons'><FaWind />{weather.wind && weather.wind.speed} km/h</p> </div>
+                  <div className="div7-small"><p className='weather-icons'><FaMoon  />{datesunset}</p> </div>
+                  <div className="div8-small"><p className='weather-icons'><FaSun  />{datesunrise}</p> </div>
+                  <div className="div9-small"><p className='weather-icons'><FaTemperatureHigh  /> Feels like: {weather.main && weather.main.feels_like}&deg;C</p> </div>
+                  <div className="div10-small"> </div>
+                  <div className="div11-small"><p>{oneday}</p>
+        <img src={url1} alt=""/>
+        <p>{forecast.daily && forecast.daily[1].temp.min}&deg;C / {forecast.daily && forecast.daily[1].temp.max}&deg;C</p> </div>
+                  <div className="div12-small"><p>{twoday}</p>
+        <img src={url2} alt=""/>
+        <p>{forecast.daily && forecast.daily[2].temp.min}&deg;C / {forecast.daily && forecast.daily[2].temp.max}&deg;C</p> </div>
+                  <div className="div13-small"><p>{threeday}</p>
+        <img src={url3} alt=""/>
+        <p>{forecast.daily && forecast.daily[3].temp.min}&deg;C / {forecast.daily && forecast.daily[3].temp.max}&deg;C</p> </div>
+                  <div className="div14-small"><p>{fourday}</p>
+        <img src={url4} alt=""/>
+        <p>{forecast.daily && forecast.daily[4].temp.min}&deg;C / {forecast.daily && forecast.daily[4].temp.max}&deg;C</p> </div>
+            </div>
+          
+          </div>}
+            
+            
+            
+            
+            {matches.medium && <div className={darkMode ? "detail-container detail-container-dark" : "detail-container"}>
 
-    <div className={darkMode ? "detail-container detail-container-dark" : "detail-container"}>
+<div className={darkMode ? "weather-card weather-card-dark" : "weather-card"}>
 
-            <div className={darkMode ? "weather-card weather-card-dark" : "weather-card"}>
-            
-            <div className="div1">
-                <h2>{weather.name && weather.name}</h2>
-                <p>{weather.sys && weather.sys.country}</p>
-            </div>
-            
-            <div className="div2">
-                <p>{daytime}</p>
-                <h3>{weather.main && weather.main.temp}&deg;C</h3>
-            </div>
-            
-            <div className="div3">
-                <img src={url} height="150px" alt="" />
-                <h2>{weather.weather && weather.weather[0].main}</h2></div>
-            <div className="div5">
-                <p className='weather-icons'><FaHandHoldingWater />{weather.main && weather.main.humidity}%</p>
-                <p className='weather-icons'><FaWind />{weather.wind && weather.wind.speed} km/h</p>
-                <p className='weather-icons'><FaMoon  />{datesunset}</p>
-                <p className='weather-icons'><FaSun  />{datesunrise}</p>
-                <p className='weather-icons'><FaTemperatureHigh  /> Feels like: {weather.main && weather.main.feels_like}&deg;C</p>
-            </div>
-            <div className="div6">
-                <div className='forecast-day'>
-                    <p>{oneday}</p>
-                    <img src={url1} alt=""/>
-                    <p>{forecast.daily && forecast.daily[1].temp.min}&deg;C / {forecast.daily && forecast.daily[1].temp.max}&deg;C</p>
-                </div>
-                <div className='forecast-day'>
-                    <p>{twoday}</p>
-                    <img src={url2} alt=""/>
-                    <p>{forecast.daily && forecast.daily[2].temp.min}&deg;C / {forecast.daily && forecast.daily[2].temp.max}&deg;C</p>
-                </div>
-                <div className='forecast-day'>
-                    <p>{threeday}</p>
-                    <img src={url3} alt=""/>
-                    <p>{forecast.daily && forecast.daily[3].temp.min}&deg;C / {forecast.daily && forecast.daily[3].temp.max}&deg;C</p>
-                </div>
-                <div className='forecast-day'>
-                    <p>{fourday}</p>
-                    <img src={url4} alt=""/>
-                    <p>{forecast.daily && forecast.daily[4].temp.min}&deg;C / {forecast.daily && forecast.daily[4].temp.max}&deg;C</p>
-                </div>
-        
-            </div>
-              <div className="div7"> 
-              {
-                  loading ? <img alt="wait until the page loads" src={spinner} width="400px" height="400px" /> 
-                  : <iframe title="title" width="400px" height="400px"src={`https://api.lookr.com/embed/player/${webcamurl}/live`}></iframe>
-              }
-                 
-                <h2>{webcamname}</h2>
-                <div>
-                    {
-                    like ? <FaHeart size={35} onClick={handleLike} className="like-btn"/> : <FaRegHeart size={35} onClick={handleLike} className="like-btn"/>
-                    }
-                    <FaRandom size={35} className='reload-heart-btn' onClick={findRandomCity}/>
-                </div>
-              </div>
-            </div>
+<div className="div1">
+    <h2>{weather.name && weather.name}</h2>
+    <p>{weather.sys && weather.sys.country}</p>
+</div>
+
+<div className="div2">
+    <p>{daytime}</p>
+    <h3>{weather.main && weather.main.temp}&deg;C</h3>
+</div>
+
+<div className="div3">
+    <img src={url} height="150px" alt="" />
+    <h2>{weather.weather && weather.weather[0].main}</h2></div>
+<div className="div5">
+    <p className='weather-icons'><FaHandHoldingWater />{weather.main && weather.main.humidity}%</p>
+    <p className='weather-icons'><FaWind />{weather.wind && weather.wind.speed} km/h</p>
+    <p className='weather-icons'><FaMoon  />{datesunset}</p>
+    <p className='weather-icons'><FaSun  />{datesunrise}</p>
+    <p className='weather-icons'><FaTemperatureHigh  /> Feels like: {weather.main && weather.main.feels_like}&deg;C</p>
+</div>
+<div className="div6">
+    <div className='forecast-day'>
+        <p>{oneday}</p>
+        <img src={url1} alt=""/>
+        <p>{forecast.daily && forecast.daily[1].temp.min}&deg;C / {forecast.daily && forecast.daily[1].temp.max}&deg;C</p>
     </div>
+    <div className='forecast-day'>
+        <p>{twoday}</p>
+        <img src={url2} alt=""/>
+        <p>{forecast.daily && forecast.daily[2].temp.min}&deg;C / {forecast.daily && forecast.daily[2].temp.max}&deg;C</p>
+    </div>
+    <div className='forecast-day'>
+        <p>{threeday}</p>
+        <img src={url3} alt=""/>
+        <p>{forecast.daily && forecast.daily[3].temp.min}&deg;C / {forecast.daily && forecast.daily[3].temp.max}&deg;C</p>
+    </div>
+    <div className='forecast-day'>
+        <p>{fourday}</p>
+        <img src={url4} alt=""/>
+        <p>{forecast.daily && forecast.daily[4].temp.min}&deg;C / {forecast.daily && forecast.daily[4].temp.max}&deg;C</p>
+    </div>
+
+</div>
+  <div className="div7"> 
+  {
+      loading ? <img alt="wait until the page loads" src={spinner} width="400px" height="400px" /> 
+      : <iframe title="title" width="400px" height="400px"src={`https://api.lookr.com/embed/player/${webcamurl}/live`}></iframe>
+  }
+     
+    <h2>{webcamname}</h2>
+    <div>
+        {
+        like ? <FaHeart size={35} onClick={handleLike} className="like-btn"/> : <FaRegHeart size={35} onClick={handleLike} className="like-btn"/>
+        }
+        <FaRandom size={35} className='reload-heart-btn' onClick={findRandomCity}/>
+    </div>
+  </div>
+</div>
+</div>}
+          </Fragment>
+        )}
+      </Media>
+    
+    
   )
 }
