@@ -13,6 +13,7 @@ const {darkMode, setDarkMode} = useContext(ModeContext);
 
 const {cityname} = useParams()
 
+
 const [weather, setWeather]  = useState([]);  
 const [forecast, setForecast] = useState([]);
 const [webcamurl, setWebcamurl] = useState("");
